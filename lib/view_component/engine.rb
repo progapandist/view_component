@@ -19,7 +19,8 @@ module ViewComponent
       end
       options.instrumentation_enabled = false if options.instrumentation_enabled.nil?
       options.render_monkey_patch_enabled = true if options.render_monkey_patch_enabled.nil?
-      options.show_previews = Rails.env.development? || Rails.env.test?
+      # Keep the default behavior but allow for the option to be customized in environment config
+      options.show_previews = (Rails.env.development? || Rails.env.test?) unless options.show_previews
 
       if options.show_previews
         # This is still necessary because when `config.view_component` is declared, `Rails.root` is unspecified.
